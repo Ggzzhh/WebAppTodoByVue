@@ -9,6 +9,8 @@ const baseConfig = require('./webpack.config.base')
 
 const isDev = process.env.NODE_ENV === 'development'
 
+console.log(process.env.NODE_ENV);
+
 const devServer = {
   port: 8000,
   host: '0.0.0.0',
@@ -43,7 +45,14 @@ if (isDev) {
           test: /\.styl(us)?$/,
           use: [
             'vue-style-loader',
-            'css-loader',
+            {
+              loader:'css-loader',
+              options: {
+                // 启用css modules 可以转换css名
+                // modules: true,
+                // localIdentName: isDev? '[path]-[name]-[hash:base64:5]' : '[hash:base64:5]'
+              }
+            },
             {
               loader:'postcss-loader',
               options:{
@@ -77,7 +86,13 @@ if (isDev) {
           use: ExtractPlugin.extract({
             fallback: 'vue-style-loader',
             use: [
-              'css-loader',
+              {
+                loader:'css-loader',
+                options: {
+                  // modules: true,
+                  // localIdentName: isDev? '[path]-[name]-[hash:base64:5]' : '[hash:base64:5]'
+                }
+              },
               {
                 loader:'postcss-loader',
                 options:{

@@ -1,16 +1,17 @@
 <template>
     <header class="main-header">
+    <!--<header :class="$style['main-header']">-->
         <h1>GTodo</h1>
     </header>
 </template>
 
 <script>
   export default {
-    name: "header"
+
   }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus" scoped module>
     .main-header {
         text-align center
         h1 {
