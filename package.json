@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env NOOD_ENV=development webpack-dev-server --config webpack.config.js --color",
-    "build": "cross-env NOOD_ENV=production webpack --config webpack.config.js --color"
+    "dev": "cross-env NOOD_ENV=development webpack-dev-server --config build/webpack.config.client.js --color",
+    "build": "cross-env NOOD_ENV=production webpack --config build/webpack.config.client.js --color"
   },
   "author": "Ggzzhh",
   "license": "ISC",
@@ -32,7 +32,10 @@
     "vue-template-compiler": "^2.6.7",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.0"
+    "webpack-dev-server": "^3.2.0",
+    "webpack-merge": "^4.2.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "vue": "^2.6.7"
+  }
 }
