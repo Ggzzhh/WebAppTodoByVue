@@ -1,0 +1,10 @@
+{
+  "extends": "standard",
+  "parserOptions": {
+    "sourceType": "module",
+    "parser": "babel-eslint"
+  },
+  "plugins": [
+    "vue"
+  ]
+}

@@ -8,7 +8,7 @@ const isDev = process.env.NODE_ENV === 'development'
 const config = {
   target: "web",
   // 模式： 开发
-  mode: 'development',
+  mode: process.env.NODE_ENV,
   // 入口：
   entry: path.join(__dirname, '../client/index.js'),
   // 输出:
@@ -19,6 +19,13 @@ const config = {
   module: {
     // 匹配规则，loader配置
     rules: [
+      {
+        test: '/\.(vue|js|jsx)/',
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+        // 预处理 pre 之前 post 之后
+        enforce: 'pre'
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -53,4 +60,3 @@ const config = {
 
 
 module.exports = config
-

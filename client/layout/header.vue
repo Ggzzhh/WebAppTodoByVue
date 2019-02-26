@@ -1,13 +1,11 @@
 <template>
     <header class="main-header">
-    <!--<header :class="$style['main-header']">-->
         <h1>GTodo</h1>
     </header>
 </template>
 
 <script>
   export default {
-
   }
 </script>
 

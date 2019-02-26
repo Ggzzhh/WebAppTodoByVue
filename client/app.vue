@@ -17,11 +17,6 @@
       Header,
       Footer,
       Todo,
-    },
-    data() {
-      return {
-
-      }
     }
   }
 </script>

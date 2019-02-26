@@ -8,5 +8,5 @@ const root = document.createElement('div')
 document.body.appendChild(root)
 
 new Vue({
-    render: (h) => h(app)
+  render: (h) => h(app)
 }).$mount(root)
