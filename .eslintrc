@@ -6,5 +6,8 @@
   },
   "plugins": [
     "vue"
-  ]
+  ],
+  "rules": {
+    "no-new": "off"
+  }
 }
