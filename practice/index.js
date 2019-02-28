@@ -1,1 +1,4 @@
-import './leftcycle'
+// import './leftcycle'
+// import './data-binding'
+// import './computed'
+import './directive'
