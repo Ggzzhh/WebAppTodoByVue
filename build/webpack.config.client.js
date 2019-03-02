@@ -20,7 +20,11 @@ const devServer = {
   // 自动打开浏览器
   // open: true,
   // 热更新？不会加载整个页面
-  hot: true
+  hot: true,
+  // 开启vue-router history模式后需要后端支持才能使用
+  historyApiFallback: {
+    index: '/index.html'
+  }
 }
 
 const defaultPulgins = [
@@ -31,7 +35,9 @@ const defaultPulgins = [
   }),
   // v15版的vue-loader 需要这样才能使用
   new VueLoaderPlugin(),
-  new HTMLPlugin()
+  new HTMLPlugin({
+    template: path.join(__dirname, 'template.html')
+  })
 ]
 
 let config

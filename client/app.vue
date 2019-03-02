@@ -2,7 +2,13 @@
   <div id="app">
     <div id="cover"></div>
     <Header></Header>
-    <Todo></Todo>
+    <router-link to="/app">app</router-link>
+    <router-link to="/login">login</router-link>
+    <!--<Todo></Todo>-->
+    <transition name="fade">
+      <!--使用两个组件，可以给router-view加名字-->
+      <router-view />
+    </transition>
     <Footer></Footer>
   </div>
 </template>
@@ -10,13 +16,15 @@
 <script>
   import Header from './layout/header.vue'
   import Footer from './layout/footer.jsx'
-  import Todo from './views/todo/todo.vue'
 
   export default {
+    name: 'app',
     components: {
       Header,
-      Footer,
-      Todo,
+      Footer
+    },
+    mounted() {
+      console.log(this.$route)
     }
   }
 </script>
@@ -39,4 +47,6 @@
     opacity .9
     z-index -1
   }
+
+
 </style>

@@ -1,26 +1,28 @@
 <template>
   <section class="real-app">
     <input
-        type="text"
-        class="add-input"
-        autofocus="autofocus"
-        placeholder="接下去要做什么？"
-        @keyup.enter="addTodo"
+      type="text"
+      class="add-input"
+      autofocus="autofocus"
+      placeholder="接下去要做什么？"
+      @keyup.enter="addTodo"
     >
     <Item
-        :todo="todo"
-        v-for="todo in filteredTodos"
-        :key="todo.id"
-        @del="deleteTodo"
+      :todo="todo"
+      v-for="todo in filteredTodos"
+      :key="todo.id"
+      @del="deleteTodo"
     />
 
     <Tabs
-        :filter="filter"
-        :todos="todos"
-        @toggle="toggleFilter"
-        @clearAll="clearAllCompleted"
+      :filter="filter"
+      :todos="todos"
+      @toggle="toggleFilter"
+      @clearAll="clearAllCompleted"
     ></Tabs>
+    <router-view />
   </section>
+
 </template>
 
 <script>
@@ -29,6 +31,7 @@
   let id = 0;
   export default {
     name: "todo",
+    // props: ['id'],
     data(){
       return {
         todos: [],
@@ -66,6 +69,27 @@
     components: {
       Item,
       Tabs
+    },
+    mounted() {
+      // console.log(this.id)
+    },
+    // 使用组件前的钩子
+    beforeRouteEnter(to, from, next){
+      console.log('todo before enter')
+      // vm表示组件自身
+      next(vm => {
+        console.log(vm)
+      })
+    },
+    // 复用组件时触发
+    beforeRouteUpdate(to, from, next){
+      console.log('todo before update')
+      next()
+    },
+    // 离开前触发
+    beforeRouteLeave(to, from, next){
+      console.log('todo before leave')
+      next()
     }
   }
 </script>

@@ -28,7 +28,7 @@
 </script>
 
 <style lang="stylus" scoped>
-  .todo-item
+  .views-item
     position relative
     background-color #fff
     font-size 24px
