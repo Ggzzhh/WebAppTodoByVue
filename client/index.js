@@ -14,6 +14,13 @@ Vue.use(Vuex)
 const router = createRouter()
 const store = createStore()
 
+// 在全局注册模块 动态加载模块
+store.registerModule('c', {
+  state: {
+    text: 3
+  }
+})
+
 // 注册路由守卫(装饰器) 每次跳转时触发钩子
 router.beforeEach((to, from, next) => {
   // 不执行next() 不会跳转

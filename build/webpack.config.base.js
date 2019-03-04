@@ -1,6 +1,4 @@
 const path = require('path')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const HTMLPlugin = require('html-webpack-plugin')
 const createVueLoaderOptions = require('./vue-loader.config')
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -8,25 +6,18 @@ const isDev = process.env.NODE_ENV === 'development'
 const config = {
   target: "web",
   // 模式： 开发
-  mode: process.env.NODE_ENV,
+  // mode: process.env.NODE_ENV,
   // 入口：
   entry: path.join(__dirname, '../client/index.js'),
   // 输出:
   output: {
     filename: 'bundle.[hash:8].js',
-    path: path.join(__dirname, '../dist'),
-    publicPath: '/'
+    path: path.join(__dirname, '../public'),
+    publicPath: 'http://127.0.0.1:8000/public/'
   },
   module: {
     // 匹配规则，loader配置
     rules: [
-      {
-        test: '/\.(vue|js|jsx)/',
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-        // 预处理 pre 之前 post 之后
-        enforce: 'pre'
-      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',

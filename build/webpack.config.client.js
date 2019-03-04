@@ -9,7 +9,7 @@ const baseConfig = require('./webpack.config.base')
 
 const isDev = process.env.NODE_ENV === 'development'
 
-console.log(process.env.NODE_ENV);
+// console.log(process.env.NODE_ENV);
 
 const devServer = {
   port: 8000,
@@ -21,9 +21,11 @@ const devServer = {
   // open: true,
   // 热更新？不会加载整个页面
   hot: true,
+  headers: { 'Access-Control-Allow-Origin': '*' },
+  // hotOnly:true,
   // 开启vue-router history模式后需要后端支持才能使用
   historyApiFallback: {
-    index: '/index.html'
+    index: '/public/index.html'
   }
 }
 
@@ -44,6 +46,7 @@ let config
 
 if (isDev) {
   config = merge(baseConfig, {
+    mode: 'development',
     devtool: "#cheap-module-eval-source-map",
     module: {
       rules: [

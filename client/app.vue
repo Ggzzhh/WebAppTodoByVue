@@ -5,7 +5,9 @@
 
     <router-link to="/app">app</router-link>
     <router-link to="/login">login</router-link>
-    <p>{{fullName}}</p>
+    <p>{{fullName}}1</p>
+    <!--<p>{{textPlus}}</p>-->
+    <!--<p>{{textA}}</p>-->
     <p>{{counter}}</p>
     <!--<Todo></Todo>-->
     <transition name="fade">
@@ -33,14 +35,24 @@
       Footer
     },
     computed: {
+      // textA () {
+      //   return this.$store.state.a.text
+      // },
       // vuex 自带的映射方法, 也可以返回方法 如果需要计算
       // ...mapState({
       //   counter: 'count'
       // }),
       ...mapState({
-        counter: (state) => state.count
+        counter: (state) => state.count,
+        // textA: (state) => state.a.text,
+        // textC: (state) => state.c.text
       }),
-      ...mapGetters(['fullName'])
+      // ...mapGetters(['fullName'])
+      ...mapGetters({
+        'fullName': 'fullName',
+        // textPlus: 'a/textPlus'
+        // textPlus: 'textPlus'
+      })
     },
     methods: {
       ...mapActions(['updateCountAsync']),
@@ -48,18 +60,21 @@
     },
     mounted() {
       // console.log(this.$route)
-      console.log(this.$store.state.count)
-      // vuex 更新数据时使用
-      this.updateCount(0)
+      // console.log(this.$store.state.count)
+      // // vuex 更新数据时使用
+      // this.updateCount(0)
       // dispatch用于触发vuex actions中的方法
       // this.$store.dispatch('updateCountAsync', {
       //   num: 5,
       //   time: 2000
       // })
-      this.updateCountAsync({
-        num: 5,
-        time: 2000
-      })
+      // this.updateCountAsync({
+      //   num: 5,
+      //   time: 2000
+      // })
+
+      // this.updateText('123')
+      // this.add()
     }
   }
 </script>
