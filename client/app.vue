@@ -2,8 +2,11 @@
   <div id="app">
     <div id="cover"></div>
     <Header></Header>
+
     <router-link to="/app">app</router-link>
     <router-link to="/login">login</router-link>
+    <p>{{fullName}}</p>
+    <p>{{counter}}</p>
     <!--<Todo></Todo>-->
     <transition name="fade">
       <!--使用两个组件，可以给router-view加名字-->
@@ -14,6 +17,12 @@
 </template>
 
 <script>
+  import {
+    mapState,
+    mapGetters,
+    mapActions,
+    mapMutations
+  } from 'vuex'
   import Header from './layout/header.vue'
   import Footer from './layout/footer.jsx'
 
@@ -23,8 +32,34 @@
       Header,
       Footer
     },
+    computed: {
+      // vuex 自带的映射方法, 也可以返回方法 如果需要计算
+      // ...mapState({
+      //   counter: 'count'
+      // }),
+      ...mapState({
+        counter: (state) => state.count
+      }),
+      ...mapGetters(['fullName'])
+    },
+    methods: {
+      ...mapActions(['updateCountAsync']),
+      ...mapMutations(['updateCount'])
+    },
     mounted() {
-      console.log(this.$route)
+      // console.log(this.$route)
+      console.log(this.$store.state.count)
+      // vuex 更新数据时使用
+      this.updateCount(0)
+      // dispatch用于触发vuex actions中的方法
+      // this.$store.dispatch('updateCountAsync', {
+      //   num: 5,
+      //   time: 2000
+      // })
+      this.updateCountAsync({
+        num: 5,
+        time: 2000
+      })
     }
   }
 </script>

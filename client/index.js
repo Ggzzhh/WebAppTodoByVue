@@ -5,10 +5,14 @@ import VueRouter from 'vue-router'
 import './assets/styles/global.styl'
 import './assets/styles/footer.styl'
 import createRouter from './config/router'
+import createStore from './store/store'
+import Vuex from 'vuex'
 
 Vue.use(VueRouter)
+Vue.use(Vuex)
 
 const router = createRouter()
+const store = createStore()
 
 // 注册路由守卫(装饰器) 每次跳转时触发钩子
 router.beforeEach((to, from, next) => {
@@ -31,5 +35,6 @@ router.afterEach((to, from) => {
 
 new Vue({
   router,
+  store,
   render: (h) => h(app)
 }).$mount('#root')
