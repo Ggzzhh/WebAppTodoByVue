@@ -78,7 +78,7 @@
       console.log('todo before enter')
       // vm表示组件自身
       next(vm => {
-        console.log(vm)
+        // console.log(vm)
       })
     },
     // 复用组件时触发

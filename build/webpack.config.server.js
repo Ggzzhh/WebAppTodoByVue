@@ -5,15 +5,17 @@ const merge = require('webpack-merge')
 const ExtractPlugin = require('extract-text-webpack-plugin')
 const baseConfig = require('./webpack.config.base')
 const VueServerPlugin = require('vue-server-renderer/server-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 
 let config
 
 config = merge(baseConfig, {
+  mode: 'development',
   target: 'node',
   entry: path.join(__dirname, '../client/server-entry.js'),
   output: {
-    libraryExport: 'commonjs2',
+    libraryTarget: 'commonjs2',
     filename: 'server-entry.js',
     path: path.join(__dirname, '../server-build')
   },
@@ -23,25 +25,19 @@ config = merge(baseConfig, {
     rules: [
       {
         test: /\.styl(us)?$/,
-        use: ExtractPlugin.extract({
-          fallback: 'vue-style-loader',
-          use: [
-            {
-              loader:'css-loader',
-              options: {
-                // modules: true,
-                // localIdentName: isDev? '[path]-[name]-[hash:base64:5]' : '[hash:base64:5]'
-              }
-            },
-            {
-              loader:'postcss-loader',
-              options:{
-                sourceMap:true
-              }
-            },
-            'stylus-loader'
-          ]
-        })
+        use: [
+          // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/90
+          'vue-style-loader',
+          // MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          'stylus-loader'
+        ]
       }
     ]
   },
@@ -51,7 +47,8 @@ config = merge(baseConfig, {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"'
     }),
-    new VueServerPlugin()
+    new VueServerPlugin(),
+    new VueLoaderPlugin()
   ]
 })
 

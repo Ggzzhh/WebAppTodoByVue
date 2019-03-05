@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js --color",
+    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js --color",
     "build:client": "cross-env NODE_ENV=development webpack --config build/webpack.config.client.js --color",
     "build": "npm run clean && npm run build:client",
     "clean": "rimraf dist",
+    "dev:server": "cross-env NODE_ENV=development node server/server.js",
     "practice": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.practice.js --color"
   },
   "author": "Ggzzhh",
@@ -61,7 +62,7 @@
     "koa-router": "^7.4.0",
     "vue": "^2.6.7",
     "vue-router": "^3.0.2",
-    "vue-server-renderer": "^2.6.8",
+    "vue-server-renderer": "^2.6.7",
     "vuex": "^3.1.0"
   }
 }
