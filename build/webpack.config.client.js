@@ -4,7 +4,8 @@ const HTMLPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 // 合并不同的webpack配置
 const merge = require('webpack-merge')
-const ExtractPlugin = require('extract-text-webpack-plugin')
+// const ExtractPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const baseConfig = require('./webpack.config.base')
 const VueClientPlugin = require('vue-server-renderer/client-plugin')
 
@@ -84,61 +85,38 @@ if (isDev) {
   })
 } else {
   config = merge(baseConfig, {
+    mode: 'production',
     entry: {
-      app: path.join(__dirname, '../client/index.js'),
+      app: path.join(__dirname, '../client/client-entry.js'),
       vendor: ['vue']
     },
     output: {
-      filename: '[name].[chunkhash:8].js'
+      filename: '[name].[chunkhash:8].js',
+      publicPath: '/public/'
     },
     module: {
       rules: [
         {
           test: /\.styl(us)?$/,
-          use: ExtractPlugin.extract({
-            fallback: 'vue-style-loader',
-            use: [
-              {
-                loader:'css-loader',
-                options: {
-                  // modules: true,
-                  // localIdentName: isDev? '[path]-[name]-[hash:base64:5]' : '[hash:base64:5]'
-                }
-              },
-              {
-                loader:'postcss-loader',
-                options:{
-                  sourceMap:true
-                }
-              },
-              'stylus-loader'
-            ]
-          })
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            'stylus-loader'
+          ]
         }
       ]
     },
     plugins: defaultPulgins.concat([
-      new ExtractPlugin('styles.[chunkhash:8].css')
-    ]),
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          commons: {
-            chunks: 'initial',
-            minChunks: 2, maxInitialRequests: 5,
-            minSize: 0
-          },
-          vendor: {
-            test: /node_modules/,
-            chunks: 'initial',
-            name: 'vendor',
-            priority: 10,
-            enforce: true
-          }
-        }
-      },
-      runtimeChunk: true
-    }
+      new MiniCssExtractPlugin({
+        filename: 'styles.[contentHash:8].css'
+      })
+    ])
   })
 }
 

@@ -8,7 +8,7 @@ const config = {
   // 模式： 开发
   // mode: process.env.NODE_ENV,
   // 入口：
-  entry: path.join(__dirname, '../client/index.js'),
+  entry: path.join(__dirname, '../client/client-entry.js'),
   // 输出:
   output: {
     filename: 'bundle.[hash:8].js',

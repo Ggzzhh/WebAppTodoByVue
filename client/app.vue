@@ -9,7 +9,6 @@
     <!--<p>{{textPlus}}</p>-->
     <!--<p>{{textA}}</p>-->
     <p>{{counter}}</p>
-    <!--<Todo></Todo>-->
     <transition name="fade">
       <!--使用两个组件，可以给router-view加名字-->
       <router-view />
@@ -33,6 +32,9 @@
     components: {
       Header,
       Footer
+    },
+    metaInfo: {
+      title: 'Gzh \'s Title'
     },
     computed: {
       // textA () {

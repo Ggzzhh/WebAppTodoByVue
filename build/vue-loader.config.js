@@ -9,6 +9,10 @@ module.exports = (isDev) => {
     // 自定义loader 模块
     loaders: {
 
+    },
+    cssModules: {
+      localIdentName: isDev ? '[path]-[name]-[hash:base64:5]' : '[hash:base64:5]',
+      camelCase: true
     }
   }
 };

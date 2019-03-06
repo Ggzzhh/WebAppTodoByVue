@@ -38,6 +38,9 @@
         filter: 'all'
       }
     },
+    metaInfo: {
+      title: 'todo title?'
+    },
     computed: {
       filteredTodos(){
         if (this.filter === 'all'){
@@ -70,27 +73,27 @@
       Item,
       Tabs
     },
-    mounted() {
-      // console.log(this.id)
-    },
+    // mounted() {
+    //   // console.log(this.id)
+    // },
     // 使用组件前的钩子
-    beforeRouteEnter(to, from, next){
-      console.log('todo before enter')
-      // vm表示组件自身
-      next(vm => {
-        // console.log(vm)
-      })
-    },
+    // beforeRouteEnter(to, from, next){
+    //   console.log('todo before enter')
+    //   // vm表示组件自身
+    //   next(vm => {
+    //     // console.log(vm)
+    //   })
+    // },
     // 复用组件时触发
-    beforeRouteUpdate(to, from, next){
-      console.log('todo before update')
-      next()
-    },
+    // beforeRouteUpdate(to, from, next){
+    //   console.log('todo before update')
+    //   next()
+    // },
     // 离开前触发
-    beforeRouteLeave(to, from, next){
-      console.log('todo before leave')
-      next()
-    }
+    // beforeRouteLeave(to, from, next){
+    //   console.log('todo before leave')
+    //   next()
+    // }
   }
 </script>
 
