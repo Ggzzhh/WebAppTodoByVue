@@ -12,7 +12,7 @@ const isDev = process.env.NODE_ENV === 'development'
 console.log(process.env.NODE_ENV);
 
 const devServer = {
-  port: 8001,
+  port: 3333,
   host: '0.0.0.0',
   overlay: {
     errors: true
