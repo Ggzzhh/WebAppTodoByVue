@@ -9,10 +9,12 @@ import createRouter from './config/router'
 
 import './assets/styles/global.styl'
 import './assets/styles/footer.styl'
+import notication from './componments/notification'
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(Meta)
+Vue.use(notication)
 
 export default () => {
   const router = createRouter()

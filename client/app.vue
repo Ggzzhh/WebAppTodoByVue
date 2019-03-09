@@ -3,16 +3,18 @@
     <div id="cover"></div>
     <Header></Header>
 
-    <router-link to="/app">app</router-link>
-    <router-link to="/login">login</router-link>
-    <p>{{fullName}}1</p>
-    <!--<p>{{textPlus}}</p>-->
-    <!--<p>{{textA}}</p>-->
-    <p>{{counter}}</p>
+    <!--<router-link to="/app">app</router-link>-->
+    <!--<router-link to="/login">login</router-link>-->
+    <!--<p>{{fullName}}1</p>-->
+    <!--&lt;!&ndash;<p>{{textPlus}}</p>&ndash;&gt;-->
+    <!--&lt;!&ndash;<p>{{textA}}</p>&ndash;&gt;-->
+    <!--<p>{{counter}}</p>-->
     <transition name="fade">
       <!--使用两个组件，可以给router-view加名字-->
       <router-view />
     </transition>
+    <!--<notification content="test notify"/>-->
+    <button @click="notify">notify1</button>
     <Footer></Footer>
   </div>
 </template>
@@ -58,9 +60,19 @@
     },
     methods: {
       ...mapActions(['updateCountAsync']),
-      ...mapMutations(['updateCount'])
+      ...mapMutations(['updateCount']),
+      notify(){
+        this.$notify({
+          content: 'test notify',
+          btn: 'close'
+        })
+      }
     },
     mounted() {
+      // this.$notify({
+      //   content: 'test notify',
+      //   btn: 'close'
+      // })
       // console.log(this.$route)
       // console.log(this.$store.state.count)
       // // vuex 更新数据时使用
