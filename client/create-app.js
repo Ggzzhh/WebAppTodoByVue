@@ -9,12 +9,14 @@ import createRouter from './config/router'
 
 import './assets/styles/global.styl'
 import './assets/styles/footer.styl'
-import notication from './componments/notification'
+import notification from './componments/notification'
+import Tabs from './componments/tabs'
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(Meta)
-Vue.use(notication)
+Vue.use(notification)
+Vue.use(Tabs)
 
 export default () => {
   const router = createRouter()

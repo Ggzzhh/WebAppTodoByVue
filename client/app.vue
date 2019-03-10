@@ -9,6 +9,9 @@
     <!--&lt;!&ndash;<p>{{textPlus}}</p>&ndash;&gt;-->
     <!--&lt;!&ndash;<p>{{textA}}</p>&ndash;&gt;-->
     <!--<p>{{counter}}</p>-->
+
+
+
     <transition name="fade">
       <!--使用两个组件，可以给router-view加名字-->
       <router-view />
