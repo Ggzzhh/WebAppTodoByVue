@@ -2,9 +2,11 @@ const koa = require('koa')
 const send = require('koa-send')
 const path = require('path')
 const koaBody = require('koa-body')
+const koaSession = require('koa-session')
 
 const staticRouter = require('./routers/static')
 const apiRouter = require('./routers/api')
+const userRouter = require('./routers/user')
 const createDB = require('./db/db')
 const config = require('../api.config')
 
@@ -44,8 +46,15 @@ app.use(async (ctx, next) => {
   await next()
 })
 
+app.keys = ['vue ssr tech']
+app.use(koaSession({
+  key: 'v-ssr-id',
+  maxAge: 2 * 60 * 60 * 1000 // 两个小时的过期时间
+}, app))
+
 app.use(koaBody())
 app.use(staticRouter.routes()).use(staticRouter.allowedMethods())
+app.use(userRouter.routes()).use(userRouter.allowedMethods())
 app.use(apiRouter.routes()).use(apiRouter.allowedMethods())
 
 let pageRouter

@@ -12,13 +12,14 @@
       class="add-input"
       autofocus="autofocus"
       placeholder="接下去要做什么？"
-      @keyup.enter="addTodo"
+      @keyup.enter="handleAdd"
     >
     <Item
       :todo="todo"
       v-for="todo in filteredTodos"
       :key="todo.id"
       @del="deleteTodo"
+      @toggle="toggleTodoState"
     />
 
     <Helper
@@ -34,13 +35,17 @@
 <script>
   import Item from './item.vue'
   import Helper from './helper.vue'
-  let id = 0;
+  import {
+    mapState,
+    mapActions
+  } from 'Vuex'
+
   export default {
     name: "todo",
     // props: ['id'],
     data(){
       return {
-        todos: [],
+        // todos: [],
         filter: 'all',
         stats: ['all', 'active', 'completed']
       }
@@ -55,22 +60,49 @@
         }
         const completed = this.filter === 'completed'
         return this.todos.filter(todo => completed === todo.completed)
-      }
+      },
+      ...mapState(['todos'])
     },
     methods: {
-      addTodo(e) {
-        this.todos.unshift({
-          id: id++,
-          content: e.target.value.trim(),
+      ...mapActions([
+        'fetchTodos',
+        'addTodo',
+        'deleteTodo',
+        'updateTodo',
+        'deleteAllCompleted'
+      ]),
+      handleAdd (e) {
+        const content = e.target.value.trim()
+        if (!content) {
+          this.$notify({
+            content : '必须输入要做的内容！'
+          })
+          return
+        }
+
+        const todo = {
+          content,
           completed: false
-        })
+        }
+
+        this.addTodo(todo)
+
         e.target.value = ''
       },
-      deleteTodo(id) {
-        this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
+      // deleteTodo(id) {
+      //   this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
+      // },
+      toggleTodoState (todo) {
+        this.updateTodo({
+          id: todo.id,
+          todo: Object.assign({}, todo, {
+            completed: !todo.completed
+          })
+        })
       },
       clearAllCompleted(){
-        this.todos = this.todos.filter(todo => !todo.completed)
+        // this.todos = this.todos.filter(todo => !todo.completed)
+        this.deleteAllCompleted()
       },
       handleChangeTab(value){
         this.filter = value
@@ -80,9 +112,10 @@
       Item,
       Helper
     },
-    // mounted() {
-    //   // console.log(this.id)
-    // },
+    mounted() {
+      // console.log(this.id)
+      this.fetchTodos()
+    },
     // 使用组件前的钩子
     // beforeRouteEnter(to, from, next){
     //   console.log('todo before enter')

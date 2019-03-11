@@ -17,18 +17,18 @@
       <router-view />
     </transition>
     <!--<notification content="test notify"/>-->
-    <button @click="notify">notify1</button>
+    <!--<button @click="notify">notify1</button>-->
     <Footer></Footer>
   </div>
 </template>
 
 <script>
-  import {
-    mapState,
-    mapGetters,
-    mapActions,
-    mapMutations
-  } from 'vuex'
+  // import {
+  //   mapState,
+  //   mapGetters,
+  //   mapActions,
+  //   mapMutations
+  // } from 'vuex'
   import Header from './layout/header.vue'
   import Footer from './layout/footer.jsx'
 
@@ -49,27 +49,27 @@
       // ...mapState({
       //   counter: 'count'
       // }),
-      ...mapState({
-        counter: (state) => state.count,
-        // textA: (state) => state.a.text,
-        // textC: (state) => state.c.text
-      }),
+      // ...mapState({
+      //   counter: (state) => state.count,
+      //   // textA: (state) => state.a.text,
+      //   // textC: (state) => state.c.text
+      // }),
       // ...mapGetters(['fullName'])
-      ...mapGetters({
-        'fullName': 'fullName',
-        // textPlus: 'a/textPlus'
-        // textPlus: 'textPlus'
-      })
+      // ...mapGetters({
+      //   'fullName': 'fullName',
+      //   // textPlus: 'a/textPlus'
+      //   // textPlus: 'textPlus'
+      // })
     },
     methods: {
-      ...mapActions(['updateCountAsync']),
-      ...mapMutations(['updateCount']),
-      notify(){
-        this.$notify({
-          content: 'test notify',
-          btn: 'close'
-        })
-      }
+      // ...mapActions(['updateCountAsync']),
+      // ...mapMutations(['updateCount']),
+      // notify(){
+      //   this.$notify({
+      //     content: 'test notify',
+      //     btn: 'close'
+      //   })
+      // }
     },
     mounted() {
       // this.$notify({

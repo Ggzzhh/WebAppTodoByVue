@@ -27,6 +27,10 @@ const devServer = {
   headers: { 'Access-Control-Allow-Origin': '*' },
   // hotOnly:true,
   // 开启vue-router history模式后需要后端支持才能使用
+  proxy: {
+    '/api': 'http://127.0.0.1:3333',
+    '/user': 'http://127.0.0.1:3333'
+  },
   historyApiFallback: {
     index: '/public/index.html'
   }
