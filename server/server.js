@@ -1,8 +1,14 @@
 const koa = require('koa')
 const send = require('koa-send')
 const path = require('path')
+const koaBody = require('koa-body')
 
 const staticRouter = require('./routers/static')
+const apiRouter = require('./routers/api')
+const createDB = require('./db/db')
+const config = require('../api.config')
+
+const db = createDB(config.db.appID, config.db.appKey)
 
 const app = new koa()
 
@@ -33,7 +39,14 @@ app.use(async (ctx, next) => {
   }
 })
 
+app.use(async (ctx, next) => {
+  ctx.db = db
+  await next()
+})
+
+app.use(koaBody())
 app.use(staticRouter.routes()).use(staticRouter.allowedMethods())
+app.use(apiRouter.routes()).use(apiRouter.allowedMethods())
 
 let pageRouter
 if (isDev) {
