@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const ExtractPlugin = require('extract-text-webpack-plugin')
 const baseConfig = require('./webpack.config.base')
-const VueServerPlugin = require('vue-server-renderer/server-plugin')
+// const VueServerPlugin = require('vue-server-renderer/server-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 
@@ -48,7 +48,7 @@ config = merge(baseConfig, {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"'
     }),
-    new VueServerPlugin(),
+    // new VueServerPlugin(),
     new VueLoaderPlugin()
   ]
 })

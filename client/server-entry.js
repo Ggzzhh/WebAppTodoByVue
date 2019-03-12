@@ -6,6 +6,9 @@ export default context => {
     const {app, router, store} = createApp()
 
     // console.log(context)
+    if (context.user) {
+      store.state.user = context.user
+    }
 
     router.push(context.url)
 
@@ -21,13 +24,15 @@ export default context => {
         if(Component.asyncData) {
           return Component.asyncData({
             route: router.currentRoute,
+            router,
             store
           })
         }
       })).then(data => {
-        console.log(store.state)
+        // console.log(store.state)
         context.meta = app.$meta()
-
+        context.state = store.state
+        context.router = router
         resolve(app)
       })
 

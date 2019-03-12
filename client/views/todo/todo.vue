@@ -108,16 +108,22 @@
         this.filter = value
       }
     },
-    asyncData({store}) {
-      return store.dispatch('fetchTodos')
+    asyncData({store, router}) {
+      if (store.state.user){
+        return store.dispatch('fetchTodos')
+      }
+      router.replace('/login')
+      return Promise.resolve()
     },
     components: {
       Item,
       Helper
     },
     mounted() {
-      // console.log(this.id)
-      this.fetchTodos()
+      // console.log(this.todos)
+      if (this.todos && this.todos.length < 1) {
+        this.fetchTodos()
+      }
     },
     // 使用组件前的钩子
     // beforeRouteEnter(to, from, next){

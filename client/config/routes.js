@@ -1,3 +1,5 @@
+// import Todo from '../views/todo/todo.vue'
+// import Login from '../views/login/login.vue'
 
 export default [
   {
@@ -9,6 +11,7 @@ export default [
     // 可以把 :id 当成属性传入组件中
     // props: true,
     component: () => import('../views/todo/todo.vue'),
+    // component: Todo,
     // 同时加载多个组件
     // components: {
     //   default: Todo,
@@ -37,6 +40,7 @@ export default [
   {
     path: '/login',
     component: () => import('../views/login/login.vue'),
+    // component: Login,
     // components: {
     //   default: Login,
     //   a: Todo
