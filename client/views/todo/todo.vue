@@ -108,6 +108,9 @@
         this.filter = value
       }
     },
+    asyncData({store}) {
+      return store.dispatch('fetchTodos')
+    },
     components: {
       Item,
       Helper

@@ -85,7 +85,7 @@ if (isDev) {
     plugins: defaultPulgins.concat([
       new webpack.HotModuleReplacementPlugin()
       // new webpack.NoEmitOnErrorsPlugin()
-    ])
+    ]),
   })
 } else {
   config = merge(baseConfig, {
@@ -122,6 +122,12 @@ if (isDev) {
       })
     ])
   })
+}
+
+config.resolve = {
+  alias: {
+    'model': path.join(__dirname, '../client/model/client-model.js')
+  }
 }
 
 module.exports = config
