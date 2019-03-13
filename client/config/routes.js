@@ -10,7 +10,7 @@ export default [
     path: '/app',
     // 可以把 :id 当成属性传入组件中
     // props: true,
-    component: () => import('../views/todo/todo.vue'),
+    component: () => import(/* webpackChunkName: "todo-view" */'../views/todo/todo.vue'),
     // component: Todo,
     // 同时加载多个组件
     // components: {
@@ -39,7 +39,7 @@ export default [
   },
   {
     path: '/login',
-    component: () => import('../views/login/login.vue'),
+    component: () => import(/* webpackChunkName: "login-view" */'../views/login/login.vue'),
     // component: Login,
     // components: {
     //   default: Login,

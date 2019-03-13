@@ -3,10 +3,25 @@ const webpack = require('webpack')
 // 合并不同的webpack配置
 const merge = require('webpack-merge')
 const ExtractPlugin = require('extract-text-webpack-plugin')
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const baseConfig = require('./webpack.config.base')
-// const VueServerPlugin = require('vue-server-renderer/server-plugin')
+const VueServerPlugin = require('vue-server-renderer/server-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
+const isDev = process.env.NODE_ENV === 'development'
+
+const plugins = [
+  new ExtractPlugin('styles.[chunkhash:8].css'),
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+    'process.env.VUE_ENV': '"server"'
+  }),
+  new VueLoaderPlugin()
+]
+
+if (isDev) {
+  plugins.push(new VueServerPlugin())
+}
 
 let config
 
@@ -42,15 +57,7 @@ config = merge(baseConfig, {
       }
     ]
   },
-  plugins: [
-    new ExtractPlugin('styles.[chunkhash:8].css'),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-      'process.env.VUE_ENV': '"server"'
-    }),
-    // new VueServerPlugin(),
-    new VueLoaderPlugin()
-  ]
+  plugins
 })
 
 config.resolve = {
